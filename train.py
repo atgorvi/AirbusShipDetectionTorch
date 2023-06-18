@@ -24,7 +24,9 @@ def main():
     datamodule = SegmentationDataModule(hparams)
     model_pipeline = SegmentationPipeline(hparams)
 
-    trainer = pl.Trainer(max_epochs=3, logger=wandb_logger, callbacks=callbacks)
+    epochs = hparams["params"]["epochs"]
+
+    trainer = pl.Trainer(max_epochs=epochs, logger=wandb_logger, callbacks=callbacks)
     trainer.fit(model_pipeline, datamodule)
 
 

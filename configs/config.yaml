@@ -47,14 +47,14 @@ callbacks:
     save_top_k: -1
 
 model:
-  type: segmentation_models_pytorch.Unet
-  encoder_name: resnet18
+  type: segmentation_models_pytorch.FPN
+  encoder_name: efficientnet-b3
   activation: sigmoid
   encoder_weights: imagenet
   in_channels: 3
   classes: 1
 
 params:
-  epochs: 30
+  epochs: 20
   batch_size: 16
   image_size: 256

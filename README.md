@@ -54,7 +54,7 @@ Original image:
 //TODO
 
 ## Further improvements
-1. Try another architecture like DeepLabV3+, FPN, Linknet or another encoder.
+1. Try another architecture like Linknet or another encoder.
 2. Use ensemble of models, firstly classify ship/no ship and then create mask 3.Try another loss function or combine them.
 3. Try different loss function or combine them.
 4. Try another optimizer and scheduler.
@@ -63,3 +63,4 @@ Original image:
 7. If we don't want to "label" more data we can "pseudo label" it and use for training.
 8. Use postprocessing techniques such as dilation to improve masks quality.
 9. Play with more advanced augmentations, geometrical transform seem to be good choice.
+10. Tune model with very low lr and ReduceOnPlateau scheduler
