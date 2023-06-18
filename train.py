@@ -15,7 +15,11 @@ def main():
 
     pl.seed_everything(hparams["seed"])
 
-    wandb_logger = WandbLogger(project="AirbusShipDetection")
+    epochs = hparams["params"]["epochs"]
+    project_name = hparams["project_name"]
+    experiment_name = hparams["experiment_name"]
+
+    wandb_logger = WandbLogger(project=project_name, name=experiment_name)
     stopper = object_from_dict(hparams["callbacks"]["stopper"])
     lr_monitor = object_from_dict(hparams["callbacks"]["lr_monitor"])
     checkpoint = object_from_dict(hparams["callbacks"]["checkpoint"])
@@ -24,7 +28,7 @@ def main():
     datamodule = SegmentationDataModule(hparams)
     model_pipeline = SegmentationPipeline(hparams)
 
-    epochs = hparams["params"]["epochs"]
+
 
     trainer = pl.Trainer(max_epochs=epochs, logger=wandb_logger, callbacks=callbacks)
     trainer.fit(model_pipeline, datamodule)

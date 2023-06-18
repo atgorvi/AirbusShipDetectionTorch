@@ -49,7 +49,7 @@ callbacks:
 
 model:
   type: segmentation_models_pytorch.FPN
-  encoder_name: efficientnet-b3
+  encoder_name: resnet18
   activation: sigmoid
   encoder_weights: imagenet
   in_channels: 3
