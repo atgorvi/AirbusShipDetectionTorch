@@ -28,7 +28,7 @@ You can run training command with:
 python train.py --config {PATH/TO/CONFIG}
 ```
 **Architecture**: I tried Unet and FPN architectures. FPN seems to work slight better (~1%). \
-**Encoder**: resnet18 was ~2% better than efficientnetb3 in my few runs. \
+**Encoder**: resnet18 seem to have similar IoU with efficientnetb3 in my few runs. \
 **Loss**: Dice \
 **Opimizer**: Adam (lr=0.0005) \
 **Metric**: IoU (threshold=0.5) \
@@ -47,7 +47,7 @@ You can run gradio demo.py for inference:
 python demo.py --model_ckpt {PATH/TO/MODEL_CKPT} --config {PATH/TO/CONFIG}
 ```
 
-## Random image from test set: 
+Random image from test set: \
 Original image:
 ![Original image](https://github.com/atgorvi/AirbusShipDetectionTorch/blob/3247b3e7303bd20da2e486073694808f935c7ece/data/inference/original.jpg)
 Predicted mask:

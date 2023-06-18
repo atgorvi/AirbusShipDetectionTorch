@@ -1,3 +1,5 @@
 *.ckpt
 *.jpg
 ./data/train_v2_short
+./flagged
+./configs/config_FPN_efficientnet-b3_256x256.yaml
