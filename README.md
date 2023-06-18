@@ -20,7 +20,7 @@ Data prepared with notebooks/data_prep.ipynb
 - Number of images used in this task: 12583 for train, 4195 for validation, 100 for test set.
 
 ## Result
-Model has **~59 IoU** on val set
+Model has **~60 IoU** on val set
 
 ## Training
 You can run training command with:
@@ -32,9 +32,7 @@ python train.py --config {PATH/TO/CONFIG}
 **Loss**: Dice \
 **Opimizer**: Adam (lr=0.0005) \
 **Metric**: IoU (threshold=0.5) \
-**Number of epochs**: 30 
-
-My training config: configs/config.yaml
+**Number of epochs**: 20 
 
 My training config: configs/config.yaml
 
@@ -49,9 +47,13 @@ You can run gradio demo.py for inference:
 python demo.py --model_ckpt {PATH/TO/MODEL_CKPT} --config {PATH/TO/CONFIG}
 ```
 
-Random image from test set: \
+## Random image from test set: 
 Original image:
-//TODO
+![Original image](https://github.com/atgorvi/AirbusShipDetectionTorch/blob/3247b3e7303bd20da2e486073694808f935c7ece/data/inference/original.jpg)
+Predicted mask:
+![Predicted mask](https://github.com/atgorvi/AirbusShipDetectionTorch/blob/3247b3e7303bd20da2e486073694808f935c7ece/data/inference/pred_mask.jpg)
+Image with mask overlay:
+![Image with mask](https://github.com/atgorvi/AirbusShipDetectionTorch/blob/3247b3e7303bd20da2e486073694808f935c7ece/data/inference/masked.jpg)
 
 ## Further improvements
 1. Try another architecture like Linknet or another encoder.

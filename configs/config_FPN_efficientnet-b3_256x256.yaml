@@ -47,6 +47,12 @@ callbacks:
     mode: max
     save_top_k: -1
 
+trainer:
+  type: pytorch_lightning.Trainer
+  max_epochs: 20
+  precision: 32
+  #resume_from_checkpoint: lightning_logs/version_5/checkpoints/epoch=20-step=3540.ckpt
+
 model:
   type: segmentation_models_pytorch.FPN
   encoder_name: efficientnet-b3

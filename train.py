@@ -30,7 +30,7 @@ def main():
     model_pipeline = SegmentationPipeline(hparams)
 
     # Start training
-    trainer = pl.Trainer(max_epochs=epochs, logger=wandb_logger, callbacks=callbacks)
+    trainer = object_from_dict(hparams["trainer"], logger=wandb_logger, callbacks=callbacks)
     trainer.fit(model_pipeline, datamodule)
 
 
