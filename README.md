@@ -45,7 +45,7 @@ python demo.py --image {PATH/TO/IMAGE} --model_ckpt {PATH/TO/MODEL_CKPT} --confi
 ## Gradio demo, just run and put image to box
 You can run gradio demo.py for inference:
 ```sh
-python demo.py --model_ckpt {PATH/TO/MODEL_CKPT} --config {PATH/TO/CONFIG}
+python gradio_demo.py --model_ckpt {PATH/TO/MODEL_CKPT} --config {PATH/TO/CONFIG}
 ```
 
 ## Random image from test set:
