@@ -17,7 +17,7 @@ Data prepared with notebooks/data_prep.ipynb
 
 - Original image resolution: 768x768.
 - Image resolution during training: 256x256.
-- Number of images used in this task: 12583 for train, 4195 for validation, 100 for test set.
+- Number of images used in this task: 38455 for train, 12816 for validation
 
 ## Result
 Model has **~60 IoU** on val set
