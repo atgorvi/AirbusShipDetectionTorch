@@ -31,35 +31,37 @@ def parse_args():
 def main():
     args = parse_args()
 
+    # Read image
     image = cv2.imread(args.image)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    original_image_shape = image.shape[:2]
 
     with open(args.config) as f:
         hparams = yaml.load(f, Loader=yaml.SafeLoader)
 
     image_size = hparams["params"]["image_size"]
+
+    # Load model
     model = object_from_dict(hparams["model"])
-
     corrections: Dict[str, str] = {"model.": ""}
-
     state_dict = state_dict_from_disk(
         file_path=args.model_ckpt,
         rename_in_layers=corrections,
     )
     model.load_state_dict(state_dict)
 
+    # Prepare input
     transform = get_test_aug(image_size)
     image_data = transform(image)
     input = image_data.unsqueeze(0)
-    print(type(input), input.dtype, input.shape)
 
+    # Get predictions mask
     model.eval()
     with torch.no_grad():
         result = model(input)
 
     result = result.squeeze().cpu().numpy().round()
 
+    # Visualize and save results
     segmentation_result = cv2.resize(
         result, (image.shape[1], image.shape[0]), interpolation=cv2.INTER_NEAREST
     )

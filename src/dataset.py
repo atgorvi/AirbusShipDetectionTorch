@@ -24,7 +24,7 @@ class SegmentationDataset(Dataset):
         self,
         df_path: pd.DataFrame,
         image_dir: str,
-        transforms=None,
+        transforms,
     ):
         self.df = pd.read_csv(df_path)
         self.df["ImageId"] = self.df["ImageId"].map(lambda x: os.path.join(image_dir, x))
@@ -35,16 +35,17 @@ class SegmentationDataset(Dataset):
         sample = self.dataset[idx]
         image_path = sample[0]
         image_df = sample[1]
+
+        # Read image
         image = np.array(Image.open(image_path).convert("RGB"))
+
+        # Create mask from dataframe
         mask = masks_as_image(image_df["EncodedPixels"].values)
-        #mask =  np.expand_dims(mask, 0)
 
+        sample = self.transforms(image=image, mask=mask)
+        image, mask = sample["image"], sample["mask"]
 
-        if self.transforms:
-            sample = self.transforms(image=image, mask=mask)
-            image, mask = sample["image"], sample["mask"]
-
-        return image.float(), mask.float()
+        return image.float(), mask
 
     def __len__(self):
         return len(self.dataset)

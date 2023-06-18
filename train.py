@@ -10,7 +10,7 @@ from src.utils import object_from_dict
 
 
 def main():
-    with open("configs/config.yaml") as f:
+    with open("configs/config_FPN_efficientnet-b3_256x256.yaml") as f:
         hparams = yaml.load(f, Loader=yaml.SafeLoader)
 
     pl.seed_everything(hparams["seed"])
