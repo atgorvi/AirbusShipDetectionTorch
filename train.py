@@ -1,4 +1,5 @@
 import yaml
+import argparse
 
 import pytorch_lightning as pl
 
@@ -9,13 +10,23 @@ from src.module import SegmentationPipeline
 from src.utils import object_from_dict
 
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "-c", "--config", type=str, help="Path to the config", required=True
+    )
+
+    return parser.parse_args()
+
 def main():
-    with open("configs/config_FPN_efficientnet-b3_256x256.yaml") as f:
+    args = parse_args()
+
+    with open(args.config) as f:
         hparams = yaml.load(f, Loader=yaml.SafeLoader)
 
     pl.seed_everything(hparams["seed"])
 
-    epochs = hparams["params"]["epochs"]
     project_name = hparams["project_name"]
     experiment_name = hparams["experiment_name"]
 

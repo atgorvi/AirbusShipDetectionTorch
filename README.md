@@ -38,6 +38,7 @@ My training config: configs/config.yaml
 
 ## Inference example
 You can run demo.py for inference:
+#### Download checkpoint with [Model weights](https://drive.google.com/file/d/1s6m-5aNJfV_7WbPUrQB8xBeSp6RiSlJh/view?usp=sharing)
 ```sh
 python demo.py --image {PATH/TO/IMAGE} --model_ckpt {PATH/TO/MODEL_CKPT} --config {PATH/TO/CONFIG}
 ```
@@ -47,12 +48,12 @@ You can run gradio demo.py for inference:
 python demo.py --model_ckpt {PATH/TO/MODEL_CKPT} --config {PATH/TO/CONFIG}
 ```
 
-Random image from test set: \
-Original image:
+## Random image from test set:
+#### Original image:
 ![Original image](https://github.com/atgorvi/AirbusShipDetectionTorch/blob/3247b3e7303bd20da2e486073694808f935c7ece/data/inference/original.jpg)
-Predicted mask:
+#### Predicted mask:
 ![Predicted mask](https://github.com/atgorvi/AirbusShipDetectionTorch/blob/3247b3e7303bd20da2e486073694808f935c7ece/data/inference/pred_mask.jpg)
-Image with mask overlay:
+#### Image with mask overlay:
 ![Image with mask](https://github.com/atgorvi/AirbusShipDetectionTorch/blob/3247b3e7303bd20da2e486073694808f935c7ece/data/inference/masked.jpg)
 
 ## Further improvements
