@@ -11,6 +11,15 @@ from src.utils import masks_as_image
 from src.transforms import get_val_aug
 
 class SegmentationDataset(Dataset):
+    """
+    Custom dataset class for segmentation data.
+
+    Args:
+        df_path (str): The file path to the CSV containing the dataset information.
+        image_dir (str): The directory path where the images are located.
+        transforms (callable, optional): Optional transformations to apply to the images and masks. Defaults to None.
+
+    """
     def __init__(
         self,
         df_path: pd.DataFrame,

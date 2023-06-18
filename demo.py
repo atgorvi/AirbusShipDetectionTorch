@@ -87,7 +87,7 @@ def main():
     cv2.imwrite(os.path.join(save_dir, "original.jpg"), image)
     cv2.imwrite(os.path.join(save_dir, "pred_mask.jpg"), 255 * segmentation_result)
     cv2.imwrite(os.path.join(save_dir, "masked.jpg"), img_with_mask)
-    cv2.imwrite(os.path.join(save_dir, "gt_mask.jpg"), gt_mask)
+    #cv2.imwrite(os.path.join(save_dir, "gt_mask.jpg"), gt_mask)
 
     visualize(
         original_image=image,
@@ -95,7 +95,7 @@ def main():
         # label2rgb=label2rgb,
         # image_with_contour=img_with_contours,
         image_with_mask=img_with_mask,
-        ground_truth_mask=gt_mask,
+        #ground_truth_mask=gt_mask,
     )
 
 

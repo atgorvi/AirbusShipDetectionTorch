@@ -20,7 +20,7 @@ Data prepared with notebooks/data_prep.ipynb
 - Number of images used in this task: 12583 for train, 4195 for validation, 100 for test set.
 
 ## Result
-Model has **~57 IoU** on val set
+Model has **~59 IoU** on val set
 
 ## Training
 You can run training command with:

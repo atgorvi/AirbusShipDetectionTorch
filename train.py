@@ -25,11 +25,11 @@ def main():
     checkpoint = object_from_dict(hparams["callbacks"]["checkpoint"])
     callbacks = [stopper, lr_monitor, checkpoint]
 
+    # Create modules for training
     datamodule = SegmentationDataModule(hparams)
     model_pipeline = SegmentationPipeline(hparams)
 
-
-
+    # Start training
     trainer = pl.Trainer(max_epochs=epochs, logger=wandb_logger, callbacks=callbacks)
     trainer.fit(model_pipeline, datamodule)
 

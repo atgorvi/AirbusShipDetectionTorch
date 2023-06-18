@@ -38,35 +38,45 @@ if __name__ == "__main__":
     args, hparams = main()
 
     def process_image(image):
+        """
+        Process an input image using a segmentation model.
+
+        Args:
+            image (np.ndarray): The input image as a NumPy array.
+
+        Returns:
+            Tuple[np.ndarray, np.ndarray]: A tuple containing the segmentation result and the image with a mask overlay.
+
+        """
         image_size = hparams["params"]["image_size"]
+
+        # Load model
         model = object_from_dict(hparams["model"])
-
-        transform = get_test_aug(image_size)
-        image_data = transform(image)
-        input = image_data.unsqueeze(0)
-
         corrections: Dict[str, str] = {"model.": ""}
-
         state_dict = state_dict_from_disk(
             file_path=args.model_ckpt,
             rename_in_layers=corrections,
         )
         model.load_state_dict(state_dict)
 
+        # Prepare input
+        transform = get_test_aug(image_size)
+        image_data = transform(image)
+        input = image_data.unsqueeze(0)
+
+
+        # Get predictions
         model.eval()
         with torch.no_grad():
             result = model(input)
-
         result = result.squeeze().cpu().numpy().round()
 
+        # Pure segmentation mask
         segmentation_result = cv2.resize(
             result, (image.shape[1], image.shape[0]), interpolation=cv2.INTER_NEAREST
         )
 
-        label2rgb = color.label2rgb(segmentation_result, image)
-        img_with_contours = segmentation.mark_boundaries(
-            image, segmentation_result, mode="thick"
-        )
+        # Segmentation mask drawn over image
         img_with_mask = cv2.addWeighted(
             image,
             1,
@@ -83,6 +93,7 @@ if __name__ == "__main__":
         output_image = process_image(input_image)
         return output_image
 
+    # Launch gradio demo
     gr.Interface(run_segmentation, inputs=gr.Image(label="Input image"),
                  outputs=[gr.Image(label="Segmentation mask"), gr.Image(label="Segmentation mask")]).launch(debug=True)
 

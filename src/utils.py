@@ -15,6 +15,22 @@ from skimage.morphology import binary_opening, disk, label
 
 
 def average(outputs: list, name: str) -> torch.Tensor:
+    """
+    Compute the average of a specific tensor across a list of outputs.
+
+    Args:
+        outputs (list): A list of dictionaries representing the output data.
+        name (str): The key name of the tensor to compute the average for.
+
+    Returns:
+        torch.Tensor: The average value of the specified tensor across all outputs.
+
+    Raises:
+        TypeError: If the input `outputs` is not a list.
+        KeyError: If the specified `name` is not present in the output dictionaries.
+        ValueError: If the shape of the tensor specified by `name` is not supported.
+
+    """
     if len(outputs[0][name].shape) == 0:
         return torch.stack([x[name] for x in outputs]).mean()
     return torch.cat([x[name] for x in outputs]).mean()
@@ -25,7 +41,14 @@ def montage_rgb(x: np.ndarray) -> np.ndarray:
 
 def multi_rle_encode(img, **kwargs):
     """
-    Encode connected regions as separated masks
+    Encode connected regions as separated masks.
+
+    Args:
+        img (ndarray): The input image containing connected regions.
+        **kwargs: Additional keyword arguments to be passed to the `rle_encode` function.
+
+    Returns:
+        list: A list of encoded masks, each corresponding to a connected region.
     """
 
     labels = label(img)
@@ -86,6 +109,17 @@ def masks_as_color(in_mask_list) -> np.ndarray:
     return all_masks
 
 def object_from_dict(d, parent=None, **default_kwargs):
+    """
+    Create an object from a dictionary representation.
+
+    Args:
+        d (dict): A dictionary containing the object's attributes.
+        parent (object, optional): The parent object to create the object from (default: None).
+        **default_kwargs: Additional keyword arguments with default values to be used for object creation.
+
+    Returns:
+        object: The created object.
+    """
     kwargs = d.copy()
     object_type = kwargs.pop("type")
     for name, value in default_kwargs.items():
@@ -99,6 +133,18 @@ def object_from_dict(d, parent=None, **default_kwargs):
 def rename_layers(
     state_dict: Dict[str, Any], rename_in_layers: Dict[str, Any]
 ) -> Dict[str, Any]:
+    """
+    Renames specified layers in the state_dict based on the provided mapping.
+
+    Args:
+        state_dict (Dict[str, Any]): The original state dictionary containing layer names and values.
+        rename_in_layers (Dict[str, Any]): A dictionary specifying the layer names to be renamed and their corresponding new names.
+
+    Returns:
+        Dict[str, Any]: The modified state dictionary with renamed layers.
+
+    """
+
     result = {}
     for key, value in state_dict.items():
         for key_r, value_r in rename_in_layers.items():
@@ -132,24 +178,49 @@ def state_dict_from_disk(
 
     return state_dict
 
-def average(outputs: list, name: str) -> torch.Tensor:
-    if len(outputs[0][name].shape) == 0:
-        return torch.stack([x[name] for x in outputs]).mean()
-    return torch.cat([x[name] for x in outputs]).mean()
-
 def tensor_to_image(tens):
+    """
+    Converts a tensor to a PIL Image.
+
+    Args:
+        tens (torch.Tensor): The input tensor to be converted to an image.
+
+    Returns:
+        PIL.Image.Image: The PIL Image converted from the input tensor.
+
+    """
     array = tens.squeeze(0).permute(1, 2, 0).numpy() * 255
     array = array.astype(np.uint8)
     pil_img = Image.fromarray(array)
     return pil_img
 
 def mask_tensor_to_image(tens):
+    """
+    Converts a tensor mask to a PIL Image.
+
+    Args:
+        tens (torch.Tensor): The input tensor to be converted to an image.
+
+    Returns:
+        PIL.Image.Image: The PIL Image converted from the input tensor.
+
+    """
     array = tens.permute(1, 2, 0).numpy() * 255
     array = np.squeeze(array.astype(np.uint8), -1)
     pil_img = Image.fromarray(array)
     return pil_img
 
 def visualize(**images):
+    """
+    Visualizes multiple images in a grid.
+
+    Args:
+        **images: Multiple keyword arguments where the key is the name of the image and the value is the image data.
+
+    Returns:
+        None
+
+    """
     n = len(images)
     plt.figure(figsize=(16, 5))
     for i, (name, image) in enumerate(images.items()):
