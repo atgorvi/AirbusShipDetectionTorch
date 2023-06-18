@@ -1,5 +1,5 @@
 # Airbus ships detection
-Aim is to create simple binary segmentation pipeline to locate ships in images using tf.keras and Unet architecture.
+Aim is to create simple binary segmentation pipeline to locate ships in images.
 
 ## Install
 ```sh
