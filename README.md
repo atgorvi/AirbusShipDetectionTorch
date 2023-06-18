@@ -66,4 +66,4 @@ python gradio_demo.py --model_ckpt {PATH/TO/MODEL_CKPT} --config {PATH/TO/CONFIG
 7. If we don't want to "label" more data we can "pseudo label" it and use for training.
 8. Use postprocessing techniques such as dilation to improve masks quality.
 9. Play with more advanced augmentations, geometrical transform seem to be good choice.
-10. Tune model with very low lr and ReduceOnPlateau scheduler
+10. Tune model with very low lr and ReduceOnPlateau scheduler.
