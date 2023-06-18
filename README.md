@@ -34,7 +34,7 @@ python train.py --config {PATH/TO/CONFIG}
 **Metric**: IoU (threshold=0.5) \
 **Number of epochs**: 20 
 
-My training config: configs/config.yaml
+My training config: configs/config_FPN_resnet_18_256x256.yaml
 
 ## Inference example
 You can run demo.py for inference:
