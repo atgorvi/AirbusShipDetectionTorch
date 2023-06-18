@@ -3,8 +3,8 @@ Aim is to create simple binary segmentation pipeline to locate ships in images u
 
 ## Install
 ```sh
-git clone 
-cd 
+git clone https://github.com/atgorvi/AirbusShipDetectionTorch.git
+cd AirbusShipDetectionTorch
 
 pip install -r requirements.txt
 ```
