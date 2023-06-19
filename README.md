@@ -38,7 +38,7 @@ My training config: configs/config_FPN_resnet_18_256x256.yaml
 
 ## Inference example
 You can run demo.py for inference:
-#### Download checkpoint with [Model weights](https://drive.google.com/file/d/1s6m-5aNJfV_7WbPUrQB8xBeSp6RiSlJh/view?usp=sharing)
+#### Before running download checkpoint from [Model weights](https://drive.google.com/file/d/1s6m-5aNJfV_7WbPUrQB8xBeSp6RiSlJh/view?usp=sharing) and put to checkpoints forlder
 ```sh
 python demo.py --image {PATH/TO/IMAGE} --model_ckpt {PATH/TO/MODEL_CKPT} --config {PATH/TO/CONFIG}
 ```
